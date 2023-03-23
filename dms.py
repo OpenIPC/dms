@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import sys
 import struct
@@ -17,11 +19,15 @@ from dvrip import DVRIPCam
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 
 (Ui_MainWindow, QMainWindow) = uic.loadUiType('dms.ui')
 
-debug = True
+if os.path.exists('debug'):
+    debug = True
+else:
+    debug = False
+
 if debug:
     debugLevel = logging.DEBUG
     devices = ({'00:00:00:00:00:64': {'ChannelNum': 9, 'DeviceType': 4, 'GateWay': '0xFE01A8C0', 'HostIP': '0x0A01A8C0', 'HostName': 'NBD80N32RA-KL', 'HttpPort': 80, 'MAC': '00:00:00:00:00:64', 'MaxBps': 0, 'MonMode': 'TCP', 'NetConnectState': 0, 'OtherFunction': 'D=2023-03-21 13:21:32 V=78775aada187e84', 'SN': '0000000000000081', 'SSLPort': 8443, 'Submask': '0x00FFFFFF', 'TCPMaxConn': 10, 'TCPPort': 34567, 'TransferPlan': 'Quality', 'UDPPort': 34568, 'UseHSDownLoad': False, 'Brand': 'xm'}, '00:00:00:00:00:17': {'ChannelNum': 1, 'DeviceType': 1, 'GateWay': '0x0101A8C0', 'HostIP': '0x0801A8C0', 'HostName': 'LocalHost', 'HttpPort': 80, 'MAC': '00:00:00:00:00:17', 'MaxBps': 0, 'MonMode': 'TCP', 'NetConnectState': 1, 'OtherFunction': 'D=2023-03-21 13:21:34 V=1482fd4408e15a7', 'SN': '0000000000000006', 'SSLPort': 8443, 'Submask': '0x00FFFFFF', 'TCPMaxConn': 10, 'TCPPort': 34567, 'TransferPlan': 'Quality', 'UDPPort': 34568, 'UseHSDownLoad': False, 'Brand': 'xm'}, '00:00:00:00:00:1e': {'BuildDate': '2020-07-04 09:25:14', 'ChannelNum': 1, 'GateWay': '0x0101A8C0', 'HostIP': '0x0701A8C0', 'HostName': 'IVG-85HF20PYA-S', 'HttpPort': 80, 'MAC': '00:00:00:00:00:1e', 'MonMode': 'TCP', 'NetConnectState': 1, 'OtherFunction': 'D=2023-03-21 13:21:34 V=d0384e6d8a46c2f', 'SN': '0000000000000033', 'SSLPort': 8443, 'Submask': '0x00FFFFFF', 'TCPMaxConn': 10, 'TCPPort': 34567, 'UDPPort': 34568, 'UseHSDownLoad': True, 'Version': 'V5.00.R02.000559A7.10010.040400.0020000', 'Brand': 'xm'}, '00:00:00:00:00:48': {'BuildDate': '2022- 2-23 16:34: 0', 'ChannelNum': 1, 'DeviceType': 0, 'GateWay': '0xFE01A8C0', 'HostIP': '0x0501A8C0', 'HostName': 'IVG-N4', 'HttpPort': 80, 'MAC': '00:00:00:00:00:48', 'MonMode': 'TCP', 'NetConnectState': 1, 'OtherFunction': 'D=2023-03-21 13:21:33 V=a721ad83d521bc7',
@@ -39,9 +45,8 @@ def log(*args):
 logging.basicConfig(format='%(asctime)s> %(message)s',
                     level=debugLevel, datefmt='[%H:%M:%S]')
 
-class MainWindow (QMainWindow):
-    """MainWindow inherits QMainWindow"""
 
+class MainWindow (QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
@@ -96,8 +101,9 @@ class MainWindow (QMainWindow):
 def onBtnSearch():
     global devices
     if not debug:
+        devices={}
         try:
-            devices = SearchXM(devices)
+            devices = udpSearch(devices)
         except Exception as error:
             print(" ".join([str(x) for x in list(error.args)]))
     count = 0
@@ -129,7 +135,7 @@ def str2ip(s):
     return "0x%08X" % struct.unpack("I", inet_aton(s))
 
 
-def SearchXM(devices):
+def udpSearch(devices):
     server = socket(AF_INET, SOCK_DGRAM)
     server.bind(("", 34569))
     server.settimeout(2)
@@ -154,14 +160,16 @@ def SearchXM(devices):
                 devices[answer["NetWork.NetCommon"]["MAC"]][u"Brand"] = u"xm"
     return devices
 
+def cbProgress(s):
+    w.ui.statusbar.showMessage(s)
 
-def upgradeFirmware(cmd):
-    cam = DVRIPCam(ip2str(devices[cmd[1]]["HostIP"]), "admin", cmd[2])
+def upgradeFirmware(ip, username, password, filename):
+    cam = DVRIPCam(ip, username=username, password=password)
     if cam.login():
-        cmd[4](_("Auth success"))
-        cam.upgrade(cmd[3], 0x4000, cmd[4])
+        log("Auth success")
+        cam.upgrade(filename, 0x4000, cbProgress)
     else:
-        cmd[4](_("Auth failed"))
+        log("Auth failed")
 
 
 def udpSetAddresses(data):
@@ -175,7 +183,8 @@ def udpSetAddresses(data):
     config[u"HostIP"] = str2ip(data[2])
     config[u"Submask"] = str2ip(data[3])
     config[u"Username"] = w.ui.editUsername.text()
-    config[u"Password"] = DVRIPCam.sofia_hash(w.ui.editCurrentPassword.text())
+    config[u"Password"] = DVRIPCam.sofia_hash(
+        '', w.ui.editCurrentPassword.text())
     devices[data[1]][u"GateWay"] = config[u"GateWay"]
     devices[data[1]][u"HostIP"] = config[u"HostIP"]
     devices[data[1]][u"Submask"] = config[u"Submask"]
@@ -235,6 +244,14 @@ def btnSave():
         ), w.ui.editSubnetAddress.text(), w.ui.editGatewayAddress.text(), ''])
 
 
+def btnUpgrade():
+    if w.ui.tableWidget.selectedItems() and w.ui.labFilename.text():
+        selected_dev = w.ui.tableWidget.item(
+            w.ui.tableWidget.currentRow(), 1).text()
+        upgradeFirmware(w.ui.editIPAddress.text(), w.ui.editUsername.text(
+        ), w.ui.editCurrentPassword.text(), w.ui.labFilename.text())
+
+
 def onComboSelectInterface():
     iface = str(w.ui.comboInterfaces.currentText())
     w.ui.comboIPAddresses.clear()
@@ -247,6 +264,13 @@ def onComboSelectInterface():
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+    # locale = getdefaultlocale()
+    locale = 'ru_RU'
+
+    translator = QtCore.QTranslator(app)
+    translator.load('res/qt_%s.qm' % locale[0])
+    app.installTranslator(translator)
+
     w = MainWindow()
     w.show()
 
@@ -254,6 +278,7 @@ if __name__ == '__main__':
     w.ui.searchDevices.clicked.connect(onBtnSearch)
     w.ui.btnBrowse.clicked.connect(w.filedialog)
     w.ui.btnSave.clicked.connect(btnSave)
+    w.ui.btnUpgrade.clicked.connect(btnUpgrade)
     w.ui.btnChangePassword.clicked.connect(w.btnChangePassword)
     w.ui.tableWidget.cellClicked.connect(w.onRowClick)
     w.ui.comboInterfaces.currentTextChanged.connect(onComboSelectInterface)
@@ -263,7 +288,7 @@ if __name__ == '__main__':
     w.ui.tableWidget.horizontalHeader().resizeSection(0, 1)
     w.ui.tableWidget.horizontalHeader().setSectionResizeMode(
         QHeaderView.ResizeToContents)
-    w.ui.statusbar.showMessage("Idle")
+    w.ui.statusbar.showMessage(w.tr("Idle"))
 
     hostinterfaces = netifaces.interfaces()
     hostdefaultgw = netifaces.gateways()['default'][netifaces.AF_INET][1]

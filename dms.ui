@@ -10,11 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>727</height>
+    <height>686</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>XM Device Manager</string>
+   <string>DMS</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -36,7 +36,7 @@
       <x>20</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -221,7 +221,7 @@
    <widget class="QPushButton" name="btnAutoIP">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>555</x>
       <y>10</y>
       <width>71</width>
       <height>21</height>
@@ -234,7 +234,7 @@
    <widget class="QComboBox" name="comboInterfaces">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>635</x>
       <y>10</y>
       <width>261</width>
       <height>21</height>
@@ -269,7 +269,7 @@
       <x>110</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -756,7 +756,7 @@
       <x>470</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -769,7 +769,7 @@
       <x>290</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -782,7 +782,7 @@
       <x>380</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -795,7 +795,7 @@
       <x>200</x>
       <y>590</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
@@ -844,10 +844,10 @@
    <widget class="QLabel" name="labFilename">
     <property name="geometry">
      <rect>
-      <x>25</x>
-      <y>630</y>
-      <width>441</width>
-      <height>26</height>
+      <x>20</x>
+      <y>625</y>
+      <width>448</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -875,7 +875,7 @@
       <x>470</x>
       <y>625</y>
       <width>88</width>
-      <height>34</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="text">
