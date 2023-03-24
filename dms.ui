@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>686</height>
+    <height>729</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,8 +35,8 @@
      <rect>
       <x>20</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -116,30 +116,49 @@
      <number>30</number>
     </attribute>
     <row/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
-    <item row="0" column="0">
+    <column>
      <property name="text">
-      <string/>
+      <string>#</string>
      </property>
      <property name="textAlignment">
-      <set>AlignTrailing|AlignVCenter</set>
+      <set>AlignCenter</set>
      </property>
-     <property name="flags">
-      <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-     </property>
-    </item>
-    <item row="0" column="2">
+    </column>
+    <column>
      <property name="text">
-      <string/>
+      <string>IP</string>
      </property>
-    </item>
+    </column>
+    <column>
+     <property name="text">
+      <string>Port</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>MAC</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>CloudID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>New Column</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Version</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </column>
    </widget>
    <widget class="QLineEdit" name="editUsername">
     <property name="geometry">
@@ -147,7 +166,7 @@
       <x>10</x>
       <y>10</y>
       <width>101</width>
-      <height>21</height>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -159,9 +178,12 @@
      <rect>
       <x>120</x>
       <y>10</y>
-      <width>113</width>
-      <height>21</height>
+      <width>110</width>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
     </property>
     <property name="placeholderText">
      <string>password</string>
@@ -172,8 +194,8 @@
      <rect>
       <x>240</x>
       <y>10</y>
-      <width>113</width>
-      <height>21</height>
+      <width>110</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="placeholderText">
@@ -185,8 +207,8 @@
      <rect>
       <x>360</x>
       <y>10</y>
-      <width>71</width>
-      <height>21</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -198,8 +220,8 @@
      <rect>
       <x>440</x>
       <y>10</y>
-      <width>111</width>
-      <height>21</height>
+      <width>110</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="inputMask">
@@ -223,8 +245,8 @@
      <rect>
       <x>555</x>
       <y>10</y>
-      <width>71</width>
-      <height>21</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -236,8 +258,8 @@
      <rect>
       <x>635</x>
       <y>10</y>
-      <width>261</width>
-      <height>21</height>
+      <width>260</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="placeholderText">
@@ -249,8 +271,8 @@
      <rect>
       <x>910</x>
       <y>10</y>
-      <width>111</width>
-      <height>21</height>
+      <width>110</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="insertPolicy">
@@ -264,12 +286,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnAddIP">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>105</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -292,6 +317,22 @@
      <attribute name="title">
       <string>System</string>
      </attribute>
+     <widget class="QPushButton" name="btnDigitalChannels">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>480</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Digital Channels</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -320,8 +361,8 @@
         <rect>
          <x>85</x>
          <y>135</y>
-         <width>111</width>
-         <height>26</height>
+         <width>110</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="statusTip">
@@ -383,8 +424,8 @@
         <rect>
          <x>85</x>
          <y>70</y>
-         <width>111</width>
-         <height>26</height>
+         <width>110</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="statusTip">
@@ -420,8 +461,8 @@
         <rect>
          <x>85</x>
          <y>40</y>
-         <width>111</width>
-         <height>26</height>
+         <width>110</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="statusTip">
@@ -453,12 +494,15 @@
        </property>
       </widget>
       <widget class="QPushButton" name="btnSetPubDNS">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>205</x>
          <y>70</y>
-         <width>156</width>
-         <height>26</height>
+         <width>155</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="text">
@@ -470,8 +514,8 @@
         <rect>
          <x>85</x>
          <y>10</y>
-         <width>111</width>
-         <height>26</height>
+         <width>110</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="statusTip">
@@ -542,12 +586,15 @@
        </property>
       </widget>
       <widget class="QPushButton" name="btnSetIPPlus">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>205</x>
          <y>40</y>
-         <width>156</width>
-         <height>26</height>
+         <width>155</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="text">
@@ -555,12 +602,15 @@
        </property>
       </widget>
       <widget class="QPushButton" name="btnSetDefaultIP">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>205</x>
          <y>10</y>
-         <width>156</width>
-         <height>26</height>
+         <width>155</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="text">
@@ -572,8 +622,8 @@
         <rect>
          <x>85</x>
          <y>105</y>
-         <width>111</width>
-         <height>26</height>
+         <width>110</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="statusTip">
@@ -748,15 +798,31 @@
      <attribute name="title">
       <string>Settings</string>
      </attribute>
+     <widget class="QComboBox" name="comboLanguage">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>5</y>
+        <width>116</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="currentText">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Language</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="btnUpgrade">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>445</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -766,10 +832,10 @@
    <widget class="QPushButton" name="btnReboot">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>275</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -777,12 +843,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnExport">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>360</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -790,12 +859,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnAddID">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>190</x>
       <y>590</y>
-      <width>88</width>
-      <height>30</height>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -807,8 +879,8 @@
      <rect>
       <x>635</x>
       <y>590</y>
-      <width>151</width>
-      <height>34</height>
+      <width>150</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -816,12 +888,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnOpenDir">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>915</x>
       <y>590</y>
-      <width>96</width>
-      <height>34</height>
+      <width>100</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -829,12 +904,15 @@
     </property>
    </widget>
    <widget class="QPushButton" name="btnempty">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>790</x>
       <y>590</y>
-      <width>121</width>
-      <height>34</height>
+      <width>120</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -845,9 +923,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>625</y>
-      <width>448</width>
-      <height>30</height>
+      <y>620</y>
+      <width>416</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -857,7 +935,7 @@
      <enum>QFrame::Sunken</enum>
     </property>
     <property name="text">
-     <string>Upgrade filename...</string>
+     <string>Select firmware file...</string>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -872,10 +950,10 @@
    <widget class="QPushButton" name="btnBrowse">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>625</y>
-      <width>88</width>
-      <height>30</height>
+      <x>445</x>
+      <y>620</y>
+      <width>75</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
