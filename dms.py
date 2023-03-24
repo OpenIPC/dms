@@ -39,9 +39,11 @@ else:
     debugLevel = logging.INFO
     devices = {}
 
+
 def log(*args):
     # logging.debug(*args)
     print(*args)
+
 
 logging.basicConfig(format='%(asctime)s> %(message)s',
                     level=debugLevel, datefmt='[%H:%M:%S]')
@@ -98,6 +100,7 @@ class MainWindow (QMainWindow):
         # print(devices[selected_dev])
         # print(devices[1])
         self.ui.statusbar.showMessage(selected_dev)
+
 
 def onBtnSearch():
     global devices
@@ -167,10 +170,8 @@ def udpSearch(devices):
 def cbProgress(s):
     w.ui.statusbar.showMessage(s)
 
-
 def upgradeFirmware(ip, username, password, filename):
     QApplication.setOverrideCursor(Qt.WaitCursor)
-    cam = DVRIPCam(ip, username=username, password=password)
     if cam.login():
         log("Auth success")
         cam.upgrade(filename, 0x4000, cbProgress)
@@ -261,38 +262,40 @@ def btnUpgrade():
         ), w.ui.editCurrentPassword.text(), w.ui.labFilename.text())
     QApplication.restoreOverrideCursor()
 
+
 def netipLogin():
     global cam
     if w.ui.tableWidget.selectedItems():
         selected_dev = w.ui.tableWidget.item(
             w.ui.tableWidget.currentRow(), 1).text()
-        ip=w.ui.editIPAddress.text()
-        username=w.ui.editUsername.text()
-        password=w.ui.editCurrentPassword.text()
+        ip = w.ui.editIPAddress.text()
+        username = w.ui.editUsername.text()
+        password = w.ui.editCurrentPassword.text()
 
         QApplication.setOverrideCursor(Qt.WaitCursor)
         if not cam.socket:
             cam = DVRIPCam(ip, username=username, password=password)
-            cam.logger(None)
             if cam.login():
                 w.ui.statusbar.showMessage(w.tr("Connected"))
             else:
                 w.ui.statusbar.showMessage(w.tr("Login failed"))
             QApplication.restoreOverrideCursor()
             return cam
-        
+
 
 def netipSendCommand(command, *args):
     if cam.login():
-        getattr(cam,command)(*args)
+        getattr(cam, command)(*args)
         w.ui.statusbar.showMessage(w.tr(f"{command} OK"))
     else:
         w.ui.statusbar.showMessage(w.tr("Command failed"))
+
 
 def getDigitalChannels():
     if cam.login():
         info = cam.get_info("NetWork.RemoteDeviceV3")
         print(json.dumps(info, ensure_ascii=False))
+
 
 def onComboSelectInterface():
     iface = str(w.ui.comboInterfaces.currentText())
@@ -332,13 +335,12 @@ if __name__ == '__main__':
     w.ui.tableWidget.cellDoubleClicked.connect(netipLogin)
     w.ui.comboInterfaces.currentTextChanged.connect(onComboSelectInterface)
 
-    # w.ui.tableWidget.setHorizontalHeaderLabels(
-    #     ["#", "IP", "Port", "MAC", "CloudID", "Version", "Date", "Name"])
     w.ui.tableWidget.horizontalHeader().resizeSection(0, 1)
     w.ui.tableWidget.horizontalHeader().setSectionResizeMode(
         QHeaderView.ResizeToContents)
     w.ui.statusbar.showMessage(w.tr("Idle"))
 
+    # need to find replacement for netifaces, no binary buidls for python 3.10 on windows
     hostinterfaces = netifaces.interfaces()
     hostdefaultgw = netifaces.gateways()['default'][netifaces.AF_INET][1]
     badinterfaces = ['lo', 'docker', 'veth', 'vbox']
