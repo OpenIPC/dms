@@ -1,11 +1,19 @@
-# Device Management System [![Telegram](https://openipc.org/images/telegram_button.svg)][telegram]
+## Device Management System [![Telegram](https://openipc.org/images/telegram_button.svg)][telegram]
 
 
+### Installation
 
+```
+pip3 install --upgrade pip
+pip3 install -r ./requirements.txt
+```
 
-```pip3 install -r ./requirements.txt```
+### Run project
 
-```python3 ./dms.py```
+```
+python3 ./dms.py
+```
+
 
 More information about the [project][project] is available in our [website][website] and on the [wiki][wiki].
 
