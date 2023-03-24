@@ -4,6 +4,8 @@
 ### Installation
 
 ```
+git clone https://github.com/OpenIPC/dms.git
+cd dms
 pip3 install --upgrade pip
 pip3 install -r ./requirements.txt
 ```
