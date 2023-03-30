@@ -92,7 +92,7 @@
      <bool>true</bool>
     </attribute>
     <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>1</number>
+     <number>25</number>
     </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>90</number>
@@ -146,12 +146,12 @@
     </column>
     <column>
      <property name="text">
-      <string>New Column</string>
+      <string>Version</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Version</string>
+      <string>Date</string>
      </property>
     </column>
     <column>
@@ -183,7 +183,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>1</string>
+     <string/>
     </property>
     <property name="placeholderText">
      <string>password</string>
@@ -269,9 +269,9 @@
    <widget class="QComboBox" name="comboIPAddresses">
     <property name="geometry">
      <rect>
-      <x>910</x>
+      <x>900</x>
       <y>10</y>
-      <width>110</width>
+      <width>116</width>
       <height>25</height>
      </rect>
     </property>
@@ -317,22 +317,6 @@
      <attribute name="title">
       <string>System</string>
      </attribute>
-     <widget class="QPushButton" name="btnDigitalChannels">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>480</y>
-        <width>141</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Digital Channels</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -652,6 +636,22 @@
        </property>
        <property name="placeholderText">
         <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnDigitalChannels">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>205</x>
+         <y>135</y>
+         <width>155</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Digital Channels</string>
        </property>
       </widget>
      </widget>
@@ -976,7 +976,7 @@
     <bool>false</bool>
    </property>
    <property name="sizeGripEnabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="showMessage" stdset="0">
     <string>Disconnected</string>
